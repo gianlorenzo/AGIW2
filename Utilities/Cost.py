@@ -15,13 +15,12 @@ def Y00(err,select,current_min,current_max,m1,m2,uncertainty):
 
 #Costo in domande per determinare se un nuovo item soddisfa la proprietà p a partire da un insieme (n1,n2) di risposte
 def Y(err, select, n1, n2, m1, m2, y00):
-    if (n1==m1):
+    if (n1>=m1):
         return 0
-    if (n2==m2):
+    if (n2>=m2):
         return y00
     return min(y00, p.p1(err,select,n1,n2)*Y(err,select,n1+1,n2,m1,m2,y00) + p.p0(err,select,n1,n2)*Y(err,select,n1,n2+1,m1,m2,y00) + 1)
 
-print('Valore di Y00: ' + str(Y00(0.1,0.05,0,100,6,3,0.01)))
+#y00 =Y00(0.1,0.05,0,100,5,1,0.01)
 
-
-
+#print(Y(0.1,0.05,1,3,5,1,y00))
