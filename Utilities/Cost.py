@@ -20,7 +20,3 @@ def Y(err, select, n1, n2, m1, m2, y00):
     if (n2>=m2):
         return y00
     return min(y00, p.p1(err,select,n1,n2)*Y(err,select,n1+1,n2,m1,m2,y00) + p.p0(err,select,n1,n2)*Y(err,select,n1,n2+1,m1,m2,y00) + 1)
-
-#y00 =Y00(0.1,0.05,0,100,5,1,0.01)
-
-#print(Y(0.1,0.05,1,3,5,1,y00))

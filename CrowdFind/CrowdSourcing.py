@@ -1,6 +1,6 @@
 from random import random
 
-#A seconda della selettività e dell'errore del worker, dà una risposta positiva o negativa
+#A seconda della selettività del task e dell'errore del worker, dà una risposta positiva o negativa
 def giveAnAnswer(err,item):
     if (random()<=err):
         return not item.assumption
