@@ -1,9 +1,8 @@
 from Utilities import Probability as p
 
 #Costo in domande per determinare se un nuovo item soddisfa la proprietà p
-def Y00(err,select,current_min,current_max,m1,m2, uncertainty):
+def Y00(err,select,current_min,current_max,m1,m2,uncertainty):
     alfa = current_min + (current_max - current_min) / 2
-    #Assumendo un'incertezza di 0.1
     k = p.p1(err,select,0,0)*Y(err,select,1,0,m1,m2,alfa) + p.p0(err,select,0,0)*Y(err,select,0,1,m1,m2,alfa) + 1
     if (alfa >= k-uncertainty and alfa <= k+uncertainty):
         return alfa
@@ -20,6 +19,9 @@ def Y(err, select, n1, n2, m1, m2, y00):
         return 0
     if (n2==m2):
         return y00
-    return min(y00, p.p1(err,select,0,0)*Y(err,select,1,0,m1,m2,y00) + p.p0(err,select,0,0)*Y(err,select,0,1,m1,m2,y00) + 1)
+    return min(y00, p.p1(err,select,n1,n2)*Y(err,select,n1+1,n2,m1,m2,y00) + p.p0(err,select,n1,n2)*Y(err,select,n1,n2+1,m1,m2,y00) + 1)
 
-print('Valore di Yoio00:' + str(Y00(0.1,0.05,0,200,1,1,0.01)))
+print('Valore di Y00: ' + str(Y00(0.1,0.05,0,100,6,3,0.01)))
+
+
+
