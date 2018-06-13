@@ -1,4 +1,3 @@
-
 def yes1(err):
     return (1-err)
 

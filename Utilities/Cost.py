@@ -1,4 +1,4 @@
-from Probability  import Probability as p
+from Utilities import Probability as p
 
 #Costo in domande per determinare se un nuovo item soddisfa la proprietà p
 def Y00(err,select,current_min,current_max,m1,m2, uncertainty):
@@ -22,4 +22,4 @@ def Y(err, select, n1, n2, m1, m2, y00):
         return y00
     return min(y00, p.p1(err,select,0,0)*Y(err,select,1,0,m1,m2,y00) + p.p0(err,select,0,0)*Y(err,select,0,1,m1,m2,y00) + 1)
 
-print('Valore di Y00:' + str(Y00(0.1,0.05,0,200,1,1,0.01)))
+print('Valore di Yoio00:' + str(Y00(0.1,0.05,0,200,1,1,0.01)))
