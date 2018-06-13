@@ -37,7 +37,7 @@ def uncOptCost(items,K1,select,err,m1,m2,max,unc):
 
 
 
-list = uncOptCost(array,5,0.8,0.3,5,3,5,0.01)
+list = uncOptCost(array,5,0.8,0.3,5,3,900,0.01)
 for i in list:
     i.toString()
 

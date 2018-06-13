@@ -1,15 +1,17 @@
+from random import random
 from Utilities import Cost as c
-
-
 
 class Item:
 
-    n1 = 0
-    n2 = 0
-    isValuate = False
-    selectivity = 0.8
-    expCost = c.Y00(0.1,selectivity,0,500,15,10,0.01)
-
+    def __init__(self, selectivity):
+        self.n1 = 0
+        self.n2 = 0
+        self.selectivity = selectivity
+        self.expCost = 0
+        if (random()<=self.selectivity):
+            self.assumption = False
+        else:
+            self.assumption = True
 
     def setSelectivity(self,s):
         self.selectivity = s
@@ -23,11 +25,5 @@ class Item:
     def setN2(self,no):
         self.n2 = no
 
-    def setValuate(self):
-        self.selectivity = True
-
-
-
-x = Item()
-
-print(x.y)
+    def toString(self):
+        print("Risposte N1: " + str(self.n1))
