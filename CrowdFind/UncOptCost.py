@@ -2,18 +2,20 @@ from Utilities import Cost as c
 from CrowdFind import CrowdSourcing as cs
 from Items import Item
 
+def setItems(maxAnswers):
+    array = []
+    for i in range(0,maxAnswers):
+        x = Item.Item(i, 0.8)
+        array.append(x)
+    return array
 
-array = []
-for i in range(0,1000000):
-    x = Item.Item(i, 0.8)
-    array.append(x)
 
-
-def uncOptCost(items,K1,select,err,m1,m2,max,unc):
+def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
     numFasi = 0
     numDomande = 0
     L = []
     U = []
+    items = setItems(maxAnswers)
 
     #Mi calcolo il costo atteso per ogni elemento in assenza di risposte ricevute
     y00 = c.Y00(err, select, 0, max, m1, m2, unc)
@@ -58,7 +60,7 @@ def uncOptCost(items,K1,select,err,m1,m2,max,unc):
 
 
 
-list = uncOptCost(array,15,0.9,0.2,10,5,1000,0.01)
+list = uncOptCost(40,15,0.9,0.2,10,5,1000,0.01)
 for i in list:
     print(str(i.assumption))
     i.toString()
