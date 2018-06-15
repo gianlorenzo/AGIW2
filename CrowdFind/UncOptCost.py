@@ -1,6 +1,9 @@
 from Utilities import Cost as c
 from CrowdFind import CrowdSourcing as cs
 from Items import Item
+import logging
+import sys
+from datetime import datetime
 
 def setItems(maxAnswers):
     array = []
@@ -11,6 +14,10 @@ def setItems(maxAnswers):
 
 
 def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
+    log = open("logging.log","a")
+    sys.stdout = log
+    print("start " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    logging.warning("start " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     numFasi = 0
     numDomande = 0
     L = []
@@ -31,12 +38,14 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
         #Per ogni elemento in U, finché la nostra lista di elementi Yes è minore del numero di elementi yes desiderati
     while(len(L)<K1):
         print("-----------------FASE n°" + str(numFasi) + "----------------")
+        logging.warning("-----------------FASE n°" + str(numFasi) + "----------------")
         U.sort(key=lambda x: x.expCost)
         newList = U[0:K1]
         numFasi = numFasi+1
 
         for w in newList:
             print("costo atteso: " + str(w.expCost))
+            logging.warning("Costo atteso: " + str(w.expCost))
             print(str(w.assumption))
 
             #Eseguo sempre il minimo numero di domande tra quelle necessarie per raggiungere la soglia yes (m1) e la soglia no (m2)
@@ -48,6 +57,7 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
             if (w.n2==m2):
                 U.remove(w)
             print("n1: " + str(w.n1)+" n2: "+str(w.n2) + " id: " + str(w.id))
+            logging.warning("n1: " + str(w.n1)+" n2: "+str(w.n2) + " id: " + str(w.id))
             costoCorrente = c.Y(err,select,w.n1,w.n2,m1,m2,y00)
             if (costoCorrente==0):
                 U.remove(w)
@@ -55,12 +65,18 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
             else:
                 w.setCost(costoCorrente)
     print("Numero fasi: " + str(numFasi))
+    logging.warning("Numero fasi: " + str(numFasi))
     print("Numero domande: " + str(numDomande))
+    logging.warning("Numero domande: " + str(numDomande))
+    print("fine " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    logging.warning("fine " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     return L
 
 
 
-list = uncOptCost(40,15,0.9,0.2,10,5,1000,0.01)
+
+
+list = uncOptCost(10000,15,0.9,0.2,10,5,1000,0.01)
 for i in list:
     print(str(i.assumption))
     i.toString()
