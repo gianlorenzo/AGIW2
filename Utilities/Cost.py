@@ -7,10 +7,10 @@ def Y00(err,select,current_min,current_max,m1,m2,uncertainty):
     if (alfa >= k-uncertainty and alfa <= k+uncertainty):
         return alfa
     if (alfa < k):
-        print('valore di alfa: ' + str(alfa) + ' valore > di alfa: ' + str(k))
+#        print('valore di alfa: ' + str(alfa) + ' valore > di alfa: ' + str(k))
         return Y00(err,select,alfa,current_max,m1,m2,uncertainty)
     if (alfa > k):
-        print('valore di alfa: ' + str(alfa) + ' valore < di alfa: ' + str(k))
+#        print('valore di alfa: ' + str(alfa) + ' valore < di alfa: ' + str(k))
         return Y00(err,select,current_min,alfa,m1,m2,uncertainty)
 
 #Costo in domande per determinare se un nuovo item soddisfa la proprietà p a partire da un insieme (n1,n2) di risposte

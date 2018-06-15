@@ -8,7 +8,7 @@ def giveAnAnswer(err,item):
         return item.assumption
 
 def crowdSourcing(err, item):
-    if (giveAnAnswer(err,item) == 1):
+    if (giveAnAnswer(err,item)):
         item.n1 = item.n1 + 1
     else:
         item.n2 = item.n2 + 1
