@@ -5,15 +5,15 @@ import logging
 import sys
 from datetime import datetime
 
-def setItems(maxAnswers):
+def setItems(maxAnswers,selectivity):
     array = []
     for i in range(0,maxAnswers):
-        x = Item.Item(i, 0.8)
+        x = Item.Item(i, selectivity)
         array.append(x)
     return array
 
 
-def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
+def uncOptCost(maxAnswers,selectivity,K1,select,err,m1,m2,max,unc):
     log = open("logging.log","a")
     sys.stdout = log
     print("start " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -22,7 +22,7 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
     numDomande = 0
     L = []
     U = []
-    items = setItems(maxAnswers)
+    items = setItems(maxAnswers,selectivity)
 
     #Mi calcolo il costo atteso per ogni elemento in assenza di risposte ricevute
     y00 = c.Y00(err, select, 0, max, m1, m2, unc)
@@ -73,13 +73,6 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
     return L
 
 
-
-
-
-list = uncOptCost(10000,15,0.9,0.2,10,5,1000,0.01)
-for i in list:
-    print(str(i.assumption))
-    i.toString()
 
 
 
