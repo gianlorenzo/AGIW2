@@ -13,7 +13,7 @@ def setItems(maxAnswers,selectivity):
     return array
 
 
-def uncOptCost(maxAnswers,selectivity,K1,select,err,m1,m2,max,unc):
+def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
     log = open("logging.log","a")
     sys.stdout = log
     print("start " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
@@ -22,7 +22,7 @@ def uncOptCost(maxAnswers,selectivity,K1,select,err,m1,m2,max,unc):
     numDomande = 0
     L = []
     U = []
-    items = setItems(maxAnswers,selectivity)
+    items = setItems(maxAnswers,select)
 
     #Mi calcolo il costo atteso per ogni elemento in assenza di risposte ricevute
     y00 = c.Y00(err, select, 0, max, m1, m2, unc)
@@ -33,9 +33,8 @@ def uncOptCost(maxAnswers,selectivity,K1,select,err,m1,m2,max,unc):
         i.setSelectivity(select)
         U.append(i)
 
-#    for x in U:
 
-        #Per ogni elemento in U, finché la nostra lista di elementi Yes è minore del numero di elementi yes desiderati
+    #Per ogni elemento in U, finché la nostra lista di elementi Yes è minore del numero di elementi yes desiderati
     while(len(L)<K1):
         print("-----------------FASE n°" + str(numFasi) + "----------------")
         logging.warning("-----------------FASE n°" + str(numFasi) + "----------------")
