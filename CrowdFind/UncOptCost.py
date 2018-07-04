@@ -39,7 +39,7 @@ def uncOptCost(maxAnswers,K1,select,err,m1,m2,max,unc):
         print("-----------------FASE n°" + str(numFasi) + "----------------")
         logging.warning("-----------------FASE n°" + str(numFasi) + "----------------")
         U.sort(key=lambda x: x.expCost)
-        newList = U[0:K1]
+        newList = U[0:K1-len(L)]
         numFasi = numFasi+1
 
         for w in newList:
